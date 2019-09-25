@@ -1,0 +1,5 @@
+id_education;education
+P;primary
+S;secondary
+T;tertiary
+U;unknown

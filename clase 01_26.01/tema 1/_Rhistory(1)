@@ -1,0 +1,512 @@
+when genero in ('F') then 2
+when genero in ('M') then 3
+else 1 end genero_1,
+CASE WHEN CIUDAD IN ('E','EEN','EHG','EHR','ENG','ENN','ENV','EOS','ERE','ERG','ESE','ESG','ESO','EVE','EVH','EVV','EVW','EWV','EWX','EXS','G','GE','GGG','GH','GN','GS','GSR','GSX','GW','GXG','GXH','HE','HEN','HGO','HNX','HO','HOG','HRX','HS','HSH','HSN','HV','HW','HWE','HWX','HX','NEX','NH','NN','NO','NR','NS','NV','NX','O','OE','ON','OO','OOE','OR','OV','OW','RE','REE','REO','RER','REX','RG','RGE','RGG','RGR','RGW','RHN','RHV','RNN','RNS','ROR','ROS','ROSV','ROV','RRG','RRH','RRO','RRS','RRV','RRW','RRX','RS','RSE','RSS','RVE','RVH','RVN','RVV','RVW','RWG','RWH','RWO','RXE','RXH','RXN','RXV','RXW','SE','SG','SGS','SH','SHH','SN','SO','SRN','SS','SSS','SV','SVE','SWH','SWO','SXR','V','VG','VN','VR','VS','VSW','VV','VW','VWN','VX','VXH','WNH','WO','WOS','WR','WS','WV','WX','RXRNH','WVXV','R','RWEX','EWGN','RHGW','REXS','HSNW','HHVS','ENSE','HVS','VSSG','OXR','WNE','WNG','WSW','RHGH','RR','WEW','HRRO','ROVG','EVSS','VSN','EOH','ERGG','RWHH','ERNH','RSOS','RXRR','SOH','ROWHE','SNE','N','NVV','RXHO','SGE','RN','SVR','OEH','GGHXW','GG','RSWWE','SWHS','VVE','RV','OGEW','EGNW','VSHVW','RH','OEG','ESS','RGGSO','RWHG','HGG','GSE','GSVH','GRR','ROG','EWVN','HN','ESXX','GSEH','EESW','EO','RRVG','EGNWH','HGE','RWS','WOG','WWXN','HOSVX','EE','RO','RWR','VEXS','WWE','HHW','RVNV','EENXX','EX','H','WHX','EOW','RXGX')
+THEN 0
+WHEN CIUDAD IN ('EGG','RVG','ROGW','RWOE','REVHE','EOX','EXNN','WSER','HHVOO','RSR','RXWRON','RHXXX','REREE','GSEO','HH','VWG','EG','OXX','VXW','RSEG','VHO','ERHXG','EGR','VXV','EEEO','VOS','RGOV','RES','HWHO','RRRH','VHE','EHS','WGH','RSOX','SRXV','EGS','HVGNS','GWGH','RVEX','RSXO','SSHG','HWXV','HXHRO','RXX','RNV','W','VHRR','EXVVE','RXS','RXNGS','RRWOG','SER','RNE','SW','SHVVR','SHX','EGHW','NG','HR','EOHXV','SVOHS','NXOV','GNG','GO','GOEE','RHSG','S','HVE','VSR','EN','HXXHE','SSEN','ESSHH','WWXS','GER','HSW','ROX','HGREO','RRR','VXO','RGVXV','EW','RVR','VHHN','HWSX','HEE','VH','RSES','RVXN','VEVO','RXXEG','SSW','VHNV','GNE','RX')
+THEN 1
+WHEN CIUDAD IN ('VHER','EOGO','SR','RRSWS','HXSXS','VNR','ERVO','VGXG','EOE','EV','VO','WG','ROWWX','ES','RSW','RWX','EORV','ERVW','RVHXO','VNNE','EWN','ER','EVX','RHX','GVHR','WW','RHNH','EH','RNW','ROE','GVOG','OGH','HG','VEOVO','HHE','VEWH','RENHR','EEWWG','HEO','WEV','HHWR','EGHHG')
+THEN 2
+WHEN CIUDAD IN ('HNWV','OX','RHS','RSX','OWVR','NHRW','HRS','NGN','NE','RW','HNS','SX','VE','GV','EEX')
+THEN 3 else 3
+END CIUDAD_RECOD_1,
+case
+when cant_autos <= 0 then 1
+else 2 end cant_autos_1,
+case
+when tenencia_producto_a    <= 0 and   tenencia_producto_c <= 0 then 1
+when tenencia_producto_a    <= 0 and   tenencia_producto_c > 0 then 2
+else 3 end tenencia_producto_a_c_1,
+case
+when q_productos <= 0 and  por_deuda_CN <= 73.03 then 1
+when q_productos <= 0 and  por_deuda_CN > 73.03 then 2
+when q_productos <= 1 and  por_deuda_CN <= 97.59 then 3
+when q_productos <= 1 and  por_deuda_CN > 97.59 then 4
+else 5 end  q_productos_por_deuda_CN_1   ,
+case
+when  saldo_capta_promedio_c_ult <= 68.04 and saldo_capta_promedio_b_ult     <= 0 then 1
+when  saldo_capta_promedio_c_ult <= 68.04 and saldo_capta_promedio_b_ult     <= 1.295 then 2
+when  saldo_capta_promedio_c_ult <= 68.04 and saldo_capta_promedio_b_ult    > 1.295 then 3
+else 4 end  saldo_capta_promedio_c_ult_b_1
+from test ")
+dataf=test_f[,26:72]
+dataf[,1:ncol(dataf)]=lapply(dataf[,1:ncol(dataf)],as.factor)
+library( fastDummies)
+data_s1=dummy_cols(dataf[,1:(ncol(dataf))])
+data_s1_f=data_s1[,(ncol(dataf)):(ncol(data_s1))]
+data_s1_f=cbind(data_s1_f,test_f[1:25])
+names(data_s1_f)
+xtest=data_s1_f[2:173]
+dataf=test_f[,26:72]
+dataf[,1:ncol(dataf)]=lapply(dataf[,1:ncol(dataf)],as.factor)
+library( fastDummies)
+data_s1=dummy_cols(dataf[,1:(ncol(dataf))])
+data_s1_f=data_s1[,(ncol(dataf)):(ncol(data_s1))]
+data_s1_f=cbind(data_s1_f,test_f[1:25])
+xtest=data_s1_f[2:181]
+repl_python()
+x = r.xtest
+y = model.predict(x)
+exit
+probatest=py$y
+length(probatest)
+Submmit<-data.frame(id_cliente=test$id_cliente,predictions_xgb_test=probatest)
+Solucion<-write.csv(Submmit,"Solucion_Datathon3.csv",row.names = F)
+rm(list=ls())
+setwd("C:/Users/WAVE PC/Desktop/Banbif")
+# ######### 1) LIBRERIAS A UTILIZAR #################
+source('wave_paquetes.R')
+librerias <- c('sqldf','ggvis','party',"Boruta", "pROC",'randomForest','e1071','caret',
+'glmnet','mboost','adabag','xgboost','ROCR','C50','lattice','gmodels',
+'gplots','DMwR','UBL','rminer','polycor','class','neuralnet','reticulate',
+'dplyr','gridExtra','mlbench','doMC','gbm','MLmetrics')
+wave_paquetes(librerias)
+library(sqldf)
+library(ggvis)
+library(party)
+library(Boruta)
+library(pROC)
+library(randomForest)
+library(e1071)
+library(caret)
+library(glmnet)
+library(mboost)
+library(adabag)
+library(xgboost)
+library(ROCR)
+library(C50)
+#library(mlr)
+library(lattice)
+library(gmodels)
+library(gplots)
+library(DMwR)
+library(UBL)
+library(rminer)
+library(polycor)
+library(class)
+library(neuralnet)
+library(reticulate)
+library(dplyr)
+library(gridExtra)
+library(mlbench)
+library(gbm)
+library(MLmetrics)
+input_name='data_limpia'
+#save(data_s1_f, file = paste(input_name,".RData", sep = ""))
+#
+load(file = paste(input_name,".RData", sep = ""))
+#
+set.seed(1234)
+sample <- createDataPartition(data_s1_f$y, p = .80,list = FALSE,times = 1)
+data.train <- data_s1_f[ sample,]
+data.test <- data_s1_f[-sample,]
+data.train.1=data.train
+data.test.1=data.test
+nnn=ncol(data.train.1)
+x=data.train.1 %>% select(-y)
+y=data.train.1$y
+x1=data.test.1%>% select(-y)
+y1=data.test.1$y
+use_python("/usr/local/bin/python")
+repl_python()
+import lightgbm as lgb
+train_data = lgb.Dataset(r.x, label=r.y)
+test_data = lgb.Dataset(r.x1, label=r.y1)
+exit
+# gbdt
+# gbrt
+repl_python()
+parameters = {
+'application': 'binary',
+'objective': 'binary',
+'metric': 'auc',
+'is_unbalance': 'true',
+'boosting': 'gbdt',
+'num_leaves': 32,
+'feature_fraction': 0.6,
+'bagging_fraction': 0.5,
+'bagging_freq': 50,
+'learning_rate': 0.01,
+'verbose': 0
+}
+model = lgb.train(parameters,
+train_data,
+valid_sets=test_data,
+num_boost_round=600,
+early_stopping_rounds=100)
+exit
+set.seed(1234)
+sample <- createDataPartition(data_s1_f$y, p = .90,list = FALSE,times = 1)
+data.train <- data_s1_f[ sample,]
+data.test <- data_s1_f[-sample,]
+#
+data.train.1=data.train
+data.test.1=data.test
+nnn=ncol(data.train.1)
+x=data.train.1 %>% select(-y)
+y=data.train.1$y
+x1=data.test.1%>% select(-y)
+y1=data.test.1$y
+use_python("/usr/local/bin/python")
+repl_python()
+import lightgbm as lgb
+train_data = lgb.Dataset(r.x, label=r.y)
+test_data = lgb.Dataset(r.x1, label=r.y1)
+exit
+# gbdt
+# gbrt
+repl_python()
+parameters = {
+'application': 'binary',
+'objective': 'binary',
+'metric': 'auc',
+'is_unbalance': 'true',
+'boosting': 'gbdt',
+'num_leaves': 32,
+'feature_fraction': 0.6,
+'bagging_fraction': 0.5,
+'bagging_freq': 50,
+'learning_rate': 0.01,
+'verbose': 0
+}
+model = lgb.train(parameters,
+train_data,
+valid_sets=test_data,
+num_boost_round=600,
+early_stopping_rounds=100)
+exit
+library(readr)
+test <- read_delim("data_test_2_1.txt",
+"|", escape_double = FALSE, trim_ws = TRUE)
+dataf=test_f
+test_f=sqldf("select
+case
+when calificacion in ('SN DATA' ,'CP') then 1
+when calificacion in ('CN') then 2
+else 3 end  calificacion_1,
+case
+when antiguedad_cliente <= 16 then 4
+when antiguedad_cliente <= 39 then 3
+when antiguedad_cliente <= 111 then 2
+else 1 end antiguedad_cliente_1,
+case
+when estado_civil in ('SiN DATA' ,'SIN DATA' ,'COHABITADO') then 1
+when estado_civil IN ('SOLTERO') then 2
+when estado_civil in ( 'CASADO', 'VIUDO' ) then 3
+when estado_civil in ('DIVORCIADO')  then 4 else 4 end estado_civil_1,
+case
+when edad <= 28 then 1 else 2 end edad_1,
+case
+when segmento in ('Sin Segmentos' ,'Empleado BIF' ,'Personas') then 1
+when segmento in ('Preferente') then 2
+when segmento in ('Premium') then 3 else 3 end segmento_1,
+case
+when ingreso_estimado <= 708.05 then 1
+when ingreso_estimado <= 1949.9 then 2
+when ingreso_estimado <= 2918.9 then 3
+else 4 end  ingreso_estimado_1,
+case
+when saldo_capta_promedio_ult <= 8.35 then 1
+when saldo_capta_promedio_ult <= 67.93 then 2
+when saldo_capta_promedio_ult <= 571.914 then 3
+else 4 end saldo_capta_promedio_ult_1 ,
+case
+when saldo_capta_promedio_producto_a_ult <= 0.001 then 1
+when saldo_capta_promedio_producto_a_ult <= 1.586 then 2
+else 3 end saldo_capta_promedio_producto_a_ult_1,
+case
+when saldo_capta_promedio_producto_a_ult <= 0.001 then 1
+when saldo_capta_promedio_producto_a_ult <= 1.806 then 2
+else 3 end saldo_capta_promedio_producto_a_ult_1 ,
+case
+when saldo_capta_promedio_b_ult <= 0.001 then 1
+when saldo_capta_promedio_b_ult <= 1.806 then 2
+else 3 end saldo_capta_promedio_b_ult_1,
+case
+when saldo_capta_promedio_c_ult <= 68.041 then 1
+else 2 end saldo_capta_promedio_c_ult_1,
+case
+when saldo_capta_promedio_otros_ult <= 0.01 then 1
+when saldo_capta_promedio_otros_ult <= 7.901 then 2
+else 3 end saldo_capta_promedio_otros_ult_1,
+case
+when saldo_coloca_promedio_ult <= 0.039 then 1
+else 2 end saldo_coloca_promedio_ult_1 ,
+case
+when saldo_ult <= 44.55 then 1
+when saldo_ult <= 380.56 then 2
+when saldo_ult <= 2749.5 then 3
+else 4 end saldo_ult_1,
+case
+when saldo_p_ult <= 28.74 then 1
+when saldo_p_ult <= 358.64 then 2
+when saldo_p_ult <= 2283.8 then 3
+else 4 end saldo_p_ult_1,
+case
+when saldo_ap_ult <= 1.8 then 1
+when saldo_ap_ult <= 36.44 then 2
+when saldo_ap_ult <= 388.2 then 3
+when saldo_ap_ult <= 2950.61 then 4
+else 5 end saldo_ap_ult_1 ,
+case
+when patron_saldos IN ('000') then 1
+when patron_saldos IN ('010','001','011') then 2
+when patron_saldos IN ('101','111') then 3
+else 4 end patron_saldos_arb_1,
+case
+when patron_deuda_ssff IN ('000','001') then 1
+when patron_deuda_ssff IN ('111','011','101','110','100') then 2
+when patron_deuda_ssff IN ('010') then 3
+else 4 end patron_deuda_ssff_arb_1,
+case
+when q_productos <= 0 then 1
+when q_productos <= 1 then 2
+else 3 end q_productos_1,
+case
+when por_deuda_CN <= 96.85 then 1
+else 2 end por_deuda_CN_1,
+case
+when Linea_de_TC_Utilizada  <= 0.04 then  1
+when Linea_de_TC_Utilizada <=  23684.04 then 2
+else 3 end Linea_de_TC_Utilizada_1,
+case
+when LineaTc <= 299.84 then 1
+when LineaTc <= 2304.4 then 2
+when LineaTc <= 16071.99 then 3
+when LineaTc <= 42330 then 4
+when LineaTc <= 82380.05 then 5
+else 6 end LineaTc_1,
+case
+when Linea_de_TC_Utilizada_Prom <= 0.04 then 1
+when Linea_de_TC_Utilizada_Prom <= 10696.78 then 2
+else 3 end Linea_de_TC_Utilizada_Prom_1 ,
+case
+when LineaTc_RCC_Prom <= 266.93 then  1
+when LineaTc_RCC_Prom <= 1744.95 then 2
+when LineaTc_RCC_Prom <=  9910.723 then 3
+else 4 end  LineaTc_RCC_Prom_1 ,
+case
+when patron_Porc_Linea_Utilizada_TC in ('000','001') then 1
+else 2 end patron_Porc_Linea_Utilizada_TC_1  ,
+case
+when nro_entidades_TC_Utilizada <= 0 then 1
+when nro_entidades_TC_Utilizada <= 1 then 2
+when nro_entidades_TC_Utilizada <= 2 then 3
+else 4 end nro_entidades_TC_Utilizada_1,
+case
+when nro_entidades_TC <= 0 then 1
+when nro_entidades_TC <= 1 then 2
+when nro_entidades_TC <= 2 then 3
+when nro_entidades_TC <= 4 then 4
+else 5 end nro_entidades_TC_1,
+CASE WHEN DEPARTAMENTO_PRINCIPAL IN ('WEGN','WVW','EESG','HXVH','HEHEG','OEVGW','VWOGV','OGWNO','SGHW','ONWEN','RGEOW','VSHH','GXEHX','WVXS')
+THEN 0
+WHEN DEPARTAMENTO_PRINCIPAL IN ('RXVHH','HGVO','SSEXW','RXVXE','EGNH','GRSON','RXSEE','SHO','EXORS','GXOXSV','ESOWG')
+THEN 1
+WHEN DEPARTAMENTO_PRINCIPAL IN ('RRGVX','EXXRV')
+THEN 2
+else 2
+END  DEPARTAMENTO_RECOD_1,
+CASE WHEN ENTIDAD_PRINCIPAL IN (22,140,0,61)
+THEN 0
+WHEN ENTIDAD_PRINCIPAL IN (72,145,142,126,129,73)
+THEN 1
+WHEN ENTIDAD_PRINCIPAL IN (1,6,2,4,82)
+THEN 2
+WHEN ENTIDAD_PRINCIPAL IN (55)
+THEN 3 else 3
+END  ENTIDAD_PRINCIPAL_RECOD_1,
+CASE WHEN ENTIDAD_DEUDA_PRINCIPAL IN (22,140,61,0)
+THEN 0
+WHEN ENTIDAD_DEUDA_PRINCIPAL IN (72,129,142,145)
+THEN 1
+WHEN ENTIDAD_DEUDA_PRINCIPAL IN (73,2,1,6)
+THEN 2
+WHEN ENTIDAD_DEUDA_PRINCIPAL IN (4,126,82)
+THEN 3
+WHEN ENTIDAD_DEUDA_PRINCIPAL IN (55)
+THEN 4 else 4
+END ENTIDAD_DEUDA_PRINC_RECOD_1,
+case
+when tipo_cliente in ('0') then 1
+when tipo_cliente in  ('RETAIL') then 2
+else 3 end tipo_cliente_1 ,
+case
+when patron_prom_dias_mora_TC in ('111','011','110','000') then 1
+else 2 end patron_prom_dias_mora_TC_1,
+case
+when prest_personal <=  12203.34 then 1
+when prest_personal <= 36362.42 then 2
+else 3 end prest_personal_1,
+case
+when prest_total <=  0.06 then 1
+when prest_total <= 50785 then 2
+else 3 end prest_total_1,
+case
+when patron_prom_dias_mora_prest_total in ('111') then 1
+else 2 end patron_prom_dias_mora_prest_total_1,
+case
+when deuda_ssff <= 2.96 then 1
+when deuda_ssff <= 22478.06 then 2
+when deuda_ssff <= 67377.94 then 3
+else 4 end deuda_ssff_1 ,
+case
+when deuda_ssff_sh <= 0.04 then 1
+when deuda_ssff_sh <= 41289.17 then 2
+else 3 end deuda_ssff_sh_1 ,
+case
+when carga_financiera <= 6.994 then 1
+when carga_financiera <= 146.376 then 2
+when carga_financiera <= 1075.543 then 3
+else 4 end carga_financiera_1,
+case
+when carga_financiera_ingreso <= 0.053 then 1
+else 2 end carga_financiera_ingreso_1,
+case
+when participacion_deuda <= 0 then 1
+else 2 end participacion_deuda_1,
+case
+when participacion_deuda_sh <= 0 then 1
+else 2 end participacion_deuda_sh_1,
+case
+when genero in ('F') then 2
+when genero in ('M') then 3
+else 1 end genero_1,
+CASE WHEN CIUDAD IN ('E','EEN','EHG','EHR','ENG','ENN','ENV','EOS','ERE','ERG','ESE','ESG','ESO','EVE','EVH','EVV','EVW','EWV','EWX','EXS','G','GE','GGG','GH','GN','GS','GSR','GSX','GW','GXG','GXH','HE','HEN','HGO','HNX','HO','HOG','HRX','HS','HSH','HSN','HV','HW','HWE','HWX','HX','NEX','NH','NN','NO','NR','NS','NV','NX','O','OE','ON','OO','OOE','OR','OV','OW','RE','REE','REO','RER','REX','RG','RGE','RGG','RGR','RGW','RHN','RHV','RNN','RNS','ROR','ROS','ROSV','ROV','RRG','RRH','RRO','RRS','RRV','RRW','RRX','RS','RSE','RSS','RVE','RVH','RVN','RVV','RVW','RWG','RWH','RWO','RXE','RXH','RXN','RXV','RXW','SE','SG','SGS','SH','SHH','SN','SO','SRN','SS','SSS','SV','SVE','SWH','SWO','SXR','V','VG','VN','VR','VS','VSW','VV','VW','VWN','VX','VXH','WNH','WO','WOS','WR','WS','WV','WX','RXRNH','WVXV','R','RWEX','EWGN','RHGW','REXS','HSNW','HHVS','ENSE','HVS','VSSG','OXR','WNE','WNG','WSW','RHGH','RR','WEW','HRRO','ROVG','EVSS','VSN','EOH','ERGG','RWHH','ERNH','RSOS','RXRR','SOH','ROWHE','SNE','N','NVV','RXHO','SGE','RN','SVR','OEH','GGHXW','GG','RSWWE','SWHS','VVE','RV','OGEW','EGNW','VSHVW','RH','OEG','ESS','RGGSO','RWHG','HGG','GSE','GSVH','GRR','ROG','EWVN','HN','ESXX','GSEH','EESW','EO','RRVG','EGNWH','HGE','RWS','WOG','WWXN','HOSVX','EE','RO','RWR','VEXS','WWE','HHW','RVNV','EENXX','EX','H','WHX','EOW','RXGX')
+THEN 0
+WHEN CIUDAD IN ('EGG','RVG','ROGW','RWOE','REVHE','EOX','EXNN','WSER','HHVOO','RSR','RXWRON','RHXXX','REREE','GSEO','HH','VWG','EG','OXX','VXW','RSEG','VHO','ERHXG','EGR','VXV','EEEO','VOS','RGOV','RES','HWHO','RRRH','VHE','EHS','WGH','RSOX','SRXV','EGS','HVGNS','GWGH','RVEX','RSXO','SSHG','HWXV','HXHRO','RXX','RNV','W','VHRR','EXVVE','RXS','RXNGS','RRWOG','SER','RNE','SW','SHVVR','SHX','EGHW','NG','HR','EOHXV','SVOHS','NXOV','GNG','GO','GOEE','RHSG','S','HVE','VSR','EN','HXXHE','SSEN','ESSHH','WWXS','GER','HSW','ROX','HGREO','RRR','VXO','RGVXV','EW','RVR','VHHN','HWSX','HEE','VH','RSES','RVXN','VEVO','RXXEG','SSW','VHNV','GNE','RX')
+THEN 1
+WHEN CIUDAD IN ('VHER','EOGO','SR','RRSWS','HXSXS','VNR','ERVO','VGXG','EOE','EV','VO','WG','ROWWX','ES','RSW','RWX','EORV','ERVW','RVHXO','VNNE','EWN','ER','EVX','RHX','GVHR','WW','RHNH','EH','RNW','ROE','GVOG','OGH','HG','VEOVO','HHE','VEWH','RENHR','EEWWG','HEO','WEV','HHWR','EGHHG')
+THEN 2
+WHEN CIUDAD IN ('HNWV','OX','RHS','RSX','OWVR','NHRW','HRS','NGN','NE','RW','HNS','SX','VE','GV','EEX')
+THEN 3 else 3
+END CIUDAD_RECOD_1,
+case
+when cant_autos <= 0 then 1
+else 2 end cant_autos_1,
+case
+when tenencia_producto_a    <= 0 and   tenencia_producto_c <= 0 then 1
+when tenencia_producto_a    <= 0 and   tenencia_producto_c > 0 then 2
+else 3 end tenencia_producto_a_c_1,
+case
+when q_productos <= 0 and  por_deuda_CN <= 73.03 then 1
+when q_productos <= 0 and  por_deuda_CN > 73.03 then 2
+when q_productos <= 1 and  por_deuda_CN <= 97.59 then 3
+when q_productos <= 1 and  por_deuda_CN > 97.59 then 4
+else 5 end  q_productos_por_deuda_CN_1   ,
+case
+when  saldo_capta_promedio_c_ult <= 68.04 and saldo_capta_promedio_b_ult     <= 0 then 1
+when  saldo_capta_promedio_c_ult <= 68.04 and saldo_capta_promedio_b_ult     <= 1.295 then 2
+when  saldo_capta_promedio_c_ult <= 68.04 and saldo_capta_promedio_b_ult    > 1.295 then 3
+else 4 end  saldo_capta_promedio_c_ult_b_1
+from test ")
+dataf=test_f
+dataf[,1:ncol(dataf)]=lapply(dataf[,1:ncol(dataf)],as.factor)
+library( fastDummies)
+data_s1=dummy_cols(dataf[,1:(ncol(dataf))])
+data_s1_f=data_s1[,(ncol(dataf)):(ncol(data_s1))]
+xtest=data_s1_f
+repl_python()
+x = r.xtest
+y = model.predict(x)
+exit
+names(xtest)
+xtest=data_s1_f[,2:156]
+repl_python()
+x = r.xtest
+y = model.predict(x)
+exit
+probatest=py$y
+length(probatest)
+#head(proba14)
+Submmit<-data.frame(id_cliente=test$id_cliente,predictions_xgb_test=probatest)
+Solucion<-write.csv(Submmit,"Solucion_Datathon4.csv",row.names = F)
+#DIAGRAMAS BEANPLOT
+rm(list=ls())
+library(lattice)
+histogram(~CW | sp, data = crabs)
+setwd("C:/Users/WAVE PC/Desktop/Repaso R")
+library(readr)
+datos <- read_delim("PrecioVivienda.txt",
+"\t", escape_double = FALSE, trim_ws = TRUE)
+View(datos)
+names(datos)
+cuartos
+attach(datos)
+cuartos
+Cuartos
+library(vioplot)
+vioplot(Precio[Barrio=='Este'],Precio[Barrio=='Norte'],Precio[Barrio=='Oeste'],
+col="tomato")
+library(beanplot)
+install.packages("beanplot")
+install.packages("vioplot")
+rm(list=ls())
+library(beanplot)
+datos=read.table("PrecioVivienda.txt",header=T)
+attach(datos)
+beanplot(Precio~Barrio,col = "lightgray")
+library(vioplot)
+vioplot(Precio[Barrio=='Este'],Precio[Barrio=='Norte'],Precio[Barrio=='Oeste'],
+col="tomato")
+library(lattice)
+library(MASS)
+library(lattice)
+library(MASS)
+histogram(~CW | sp, data = crabs)
+## Gr´aficos de caja para el sexo seg´un especie
+bwplot(sex ~ CW | sp, data = crabs, layout = c(1, 2))
+library(corrplot)
+datos=read.table("PrecioVivienda.txt",header=T)
+attach(datos)
+M = cor(datos[,2:6])
+corrplot(M, method = "circle")
+install.packages("corrplot")
+#MATRICES DE CORRELACIÓN
+library(corrplot)
+datos=read.table("PrecioVivienda.txt",header=T)
+attach(datos)
+M = cor(datos[,2:6])
+corrplot(M, method = "circle")
+corrplot(M, method = "square")
+corrplot(M, method = "ellipse")
+corrplot(M, method = "number")
+corrplot(M, method = "shade")
+corrplot(M, method = "pie")
+corrplot.mixed(M, lower = "ellipse", upper = "circle")
+#GRÁFICOS SPLOM
+library(cwhmisc)
+datos=read.table("PrecioVivienda.txt",header=T)
+attach(datos)
+SplomT(datos[,2:6])
+install.packages("cwhmisc")
+#GRÁFICOS SPLOM
+library(cwhmisc)
+datos=read.table("PrecioVivienda.txt",header=T)
+attach(datos)
+SplomT(datos[,2:6])
+SplomT(datos[,2:6],mainL="",hist="d",cex.diag=0.6,hist.col="green")
+#GRÁFICOS PARA GRANDES VOLÚMENES DE DATOS
+library(IDPmisc)
+install.packages("IDPmisc")
+#GRÁFICOS PARA GRANDES VOLÚMENES DE DATOS
+library(IDPmisc)
+iplot(Precio,Piescuad,pixs=4)
+ipairs(datos[,2:6],pixs=2)
+library(aplpack)
+data(longley)
+faces(longley[1:9,],face.type=0)
+install.packages("aplpack")
+library(aplpack)
+data(longley)
+faces(longley[1:9,],face.type=0)
+plot(longley[1:16,2:3],bty="n")
+a=faces(longley[1:16,],plot=FALSE)
+plot.faces(a,longley[1:16,2],longley[1:16,3],width=35,height=30)
+a=faces(rbind(1:3,5:3,3:5,5:7),plot.faces=FALSE)
+plot(0:5,0:5,type="n")
+plot(a,x.pos=1:4,y.pos=1:4,1.5,0.7)
+#durante la temporada de navidad
+faces(face.type=2)
+daten<-iris[,2:3]
+slider.bootstrap.lm.plot(daten)

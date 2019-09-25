@@ -1,0 +1,7 @@
+help
+setwd("D:\GVILLAYZAN\Clase 1 Intro R")
+setwd("D:/GVILLAYZAN/Clase 1 Intro R")
+rm(list = ls())
+rm(list = ls())
+install.packages("neuralnet")
+library(neuralnet)

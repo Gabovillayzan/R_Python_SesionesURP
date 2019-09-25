@@ -1,0 +1,5 @@
+id_poutcome:poutcome
+U:unknown
+F:failure
+O:other
+S:success

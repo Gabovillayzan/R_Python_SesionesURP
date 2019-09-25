@@ -1,0 +1,4 @@
+id_contact,contact
+C,cellular
+U,unknown
+T,telephone

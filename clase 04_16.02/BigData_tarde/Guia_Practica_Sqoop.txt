@@ -1,0 +1,127 @@
+﻿########################################################################################################################################################################
+                                                                          Apache Sqoop
+Virtual:  hduesr/hduser
+
+SQOOP. para trasladar data de HDSF a SQL (MySQL en este caso) y viceversa
+YARN. gestionador de recursos (cluster). es el mas usado. pertenece a distribucion Hadoop
+
+spark. procesamiento en memoria
+	RDD estructura de datos distrubida (no muy usada, pero pionera)
+
+lo optimo es spark+hadoop, por sus beneficios, se complementan
+Examen primera clase de bigdata + definicion y caracteristicas de Spark... y componentes de spark
+########################################################################################################################################################################
+
+Paso 1: Importar la m�quina Virtual .ova
+
+Paso 2: Iniciar la m�quina Virtual
+
+Paso 3: Levantar los servicios de Hadoop: start-all.sh
+
+Paso 4: Comprobar que los servicios esten levantados (Java Process Status): jps
+
+Paso 5: Revisar la interfaz de Hadoop: http://localhost:50070/
+
+Paso 6: Revisar el acceso a MySQL: mysql -u root -p
+
+Paso 7: Insertar el password: MySQL2018
+
+Paso 8: Revisar las bases de datos creadas: show databases;
+
+Paso 9: Creamos una base de datos: create database urp;
+
+Paso 10: Asignamos la base de datos para usar: use urp;
+
+Paso 11: Creamos la tabla estudiantes: create table estudiantes (cod integer, name varchar(100));
+
+Paso 12: Revisamos la tabla creada: show tables;
+
+Paso 13: Creamos la primary key para la tabla estudiantes: alter table estudiantes add primary key (cod);
+
+Paso 14: Insertamos la data de los estudiantes:
+insert into estudiantes values (1,'Jose Perez Quinatanilla');
+insert into estudiantes values (2,'Juan Gomez Rivadeneyra');
+insert into estudiantes values (3,'Pedro Diez Canseco');
+insert into estudiantes values (4,'Carlos Vargas Ramos');
+
+Paso 15: Creamos la tabla docentes: create table docentes (cod integer, name varchar(100), curso varchar(50));
+
+Paso 16: Creamos la primary key para la tabla docentes: alter table docentes add primary key (cod);
+
+Paso 17: Insertamos la data de los docentes:
+insert into docentes values (1,'Andre Chavez','Phyton');
+insert into docentes values (2,'Jose Cardenas','R');
+insert into docentes values (3,'Carlos Guitarra','SQL');
+insert into docentes values (4,'Aldo Chavez','Big Data');
+
+Paso 18: Revisamos la version de Sqoop: sqoop version
+
+Paso 19: Empezamos listando las bases de datos con Sqoop:
+sqoop list-databases -connect jdbc:mysql://localhost:3306 -username root -password MySQL2018
+
+Paso 20: Listamos las tablas de la base de datos URP:
+sqoop list-tables -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018
+
+###################################################Importacion de todas las tablas de una base de datos#################################################################
+
+Paso 21: Importamos todas las tablas de la base de datos urp
+sqoop import-all-tables -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018
+
+Paso 22: Revisamos el HDFS: hadoop fs -ls /user/hduser/
+
+Paso 23: Revisamos cada tabla del HDFS: 
+hadoop fs -ls /user/hduser/estudiantes
+hadoop fs -ls /user/hduser/docentes
+
+Paso 23: Revisamos la data de cada tabla del HDFS:
+hadoop fs -cat /user/hduser/estudiantes/part-m-00000
+hadoop fs -cat /user/hduser/estudiantes/part-m-00001
+hadoop fs -cat /user/hduser/estudiantes/part-m-00002
+hadoop fs -cat /user/hduser/estudiantes/part-m-00003
+
+hadoop fs -cat /user/hduser/docentes/part-m-00000
+hadoop fs -cat /user/hduser/docentes/part-m-00001
+hadoop fs -cat /user/hduser/docentes/part-m-00002
+hadoop fs -cat /user/hduser/docentes/part-m-00003
+
+###################################################Importacion de una sola tabla a una ruta especifica#################################################################
+
+Paso 24: Creamos la ruta en el HDFS: hadoop fs -mkdir /urp
+
+Paso 25: Importamos la tabla docentes a la ruta especificada:
+sqoop import -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018 -table docentes -warehouse-dir /urp
+
+Paso 26: Revisamos la ruta en el HDFS: hadoop fs -ls /urp
+
+Paso 27: Revisamos la tabla del HDFS: 
+hadoop fs -ls /urp/docentes
+
+
+Paso 28: Revisamos la data de la tabla del HDFS:
+
+hadoop fs -cat /urp/docentes/part-m-00000
+hadoop fs -cat /urp/docentes/part-m-00001
+hadoop fs -cat /urp/docentes/part-m-00002
+hadoop fs -cat /urp/docentes/part-m-00003
+
+########################################################Exportar data de HDFS hacia la base de datos###################################################################
+
+Paso 29: Creamos la tabla en nuestra base de datos: create table postulantes (cod integer, name varchar(100));
+
+Paso 30: Exportamos la data de HDFS hacia la base de datos:
+sqoop export -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018 -table postulantes -export-dir /user/hduser/estudiantes/part-m-00000
+sqoop export -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018 -table postulantes -export-dir /user/hduser/estudiantes/part-m-00001
+sqoop export -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018 -table postulantes -export-dir /user/hduser/estudiantes/part-m-00002
+sqoop export -connect jdbc:mysql://localhost:3306/urp -username root -password MySQL2018 -table postulantes -export-dir /user/hduser/estudiantes/part-m-00003
+
+Paso 31: Consultamos la tabla exportada: select * from postulantes;
+
+Paso 32: Revisamos la data en la interfaz de Hadoop: http://localhost:50070/
+
+Paso 33: Salimos del MySQL: exit
+
+Paso 34: Detenemos los servicios de Hadoop: stop-all.sh
+
+Paso 35: Revisamos los servicios: jps
+
+Paso 36: Apagamos la maquina virtual: sudo init 0

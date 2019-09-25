@@ -1,0 +1,12 @@
+001
+012
+
+
+
+
+htmlwidgets 
+familia de paquetes para mostrar en HTML
+
+
+
+http://m.facilito.gob.pe/facilito-mobile/pages/public/buscarCombustible?idsCombustible=74&idsCombustible=78&masCercano=0&usarMiUbicacion=1&area=1&miLatitud=0&miLongitud=0&distrito=150101&provincia=150100&departamento=150000&distritoText=LIMA&provinciaText=LIMA&departamentoText=LIMA&codigoUnidad=&startIndex=0&recordsPerPage=10&back=0
